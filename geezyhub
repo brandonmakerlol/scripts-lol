@@ -1,0 +1,65 @@
+-- Services
+local StarterGui = game:GetService("StarterGui")
+
+-- UI Elements
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local AimlockButton = Instance.new("TextButton")
+local ESPButton = Instance.new("TextButton")
+
+ScreenGui.Name = "Geezy.LOL"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+MainFrame.Size = UDim2.new(0, 200, 0, 150)
+MainFrame.Position = UDim2.new(0.5, -100, 0.5, -75)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Text = "Geezy Hub"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSans
+Title.TextSize = 20
+
+AimlockButton.Name = "AimlockButton"
+AimlockButton.Parent = MainFrame
+AimlockButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+AimlockButton.Size = UDim2.new(0.8, 0, 0, 30)
+AimlockButton.Position = UDim2.new(0.1, 0, 0, 50)
+AimlockButton.Text = "Aimlock"
+AimlockButton.Font = Enum.Font.SourceSans
+AimlockButton.TextSize = 18
+
+ESPButton.Name = "ESPButton"
+ESPButton.Parent = MainFrame
+ESPButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+ESPButton.Size = UDim2.new(0.8, 0, 0, 30)
+ESPButton.Position = UDim2.new(0.1, 0, 0, 100)
+ESPButton.Text = "ESP"
+ESPButton.Font = Enum.Font.SourceSans
+ESPButton.TextSize = 18
+
+-- Button Functionality
+AimlockButton.MouseButton1Click:Connect(function()
+    local aimlockScript = [[
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/aimlock"))()
+        print("Aimlock script executed.")
+    ]]
+    loadstring(aimlockScript)()
+end)
+
+ESPButton.MouseButton1Click:Connect(function()
+    local espScript = [[
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/esp"))()
+        print("ESP script executed.")
+    ]]
+    loadstring(espScript)()
+end)
