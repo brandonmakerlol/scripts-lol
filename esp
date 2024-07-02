@@ -8,31 +8,40 @@ local espFolder = {}
 
 -- Function to create ESP for a player
 local function createESP(player)
-    local character = player.Character
-    if not character then return end
-    local head = character:FindFirstChild("Head")
-    if not head then return end
+    local function updateESP()
+        local character = player.Character
+        if not character then return end
+        local head = character:FindFirstChild("Head")
+        if not head then return end
+        
+        local billboardGui = Instance.new("BillboardGui")
+        billboardGui.Name = "ESP"
+        billboardGui.Adornee = head
+        billboardGui.Size = UDim2.new(0, 200, 0, 50)
+        billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+        billboardGui.AlwaysOnTop = true
 
-    local billboardGui = Instance.new("BillboardGui")
-    billboardGui.Name = "ESP"
-    billboardGui.Adornee = head
-    billboardGui.Size = UDim2.new(0, 200, 0, 50)
-    billboardGui.StudsOffset = Vector3.new(0, 3, 0)
-    billboardGui.AlwaysOnTop = true
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Parent = billboardGui
+        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.BackgroundTransparency = 1
+        textLabel.Text = player.DisplayName
+        textLabel.TextColor3 = Color3.new(1, 1, 1)
+        textLabel.TextStrokeTransparency = 0.5
+        textLabel.Font = Enum.Font.SourceSansBold
+        textLabel.TextSize = 14
 
-    local textLabel = Instance.new("TextLabel")
-    textLabel.Parent = billboardGui
-    textLabel.Size = UDim2.new(1, 0, 1, 0)
-    textLabel.BackgroundTransparency = 1
-    textLabel.Text = player.DisplayName
-    textLabel.TextColor3 = Color3.new(1, 1, 1)
-    textLabel.TextStrokeTransparency = 0.5
-    textLabel.Font = Enum.Font.SourceSansBold
-    textLabel.TextSize = 14
+        billboardGui.Parent = head
 
-    billboardGui.Parent = head
+        espFolder[player] = billboardGui
+    end
 
-    espFolder[player] = billboardGui
+    player.CharacterAdded:Connect(updateESP)
+    player.CharacterRemoving:Connect(function()
+        removeESP(player)
+    end)
+
+    updateESP()
 end
 
 -- Function to remove ESP for a player
@@ -54,12 +63,6 @@ end
 
 -- Function to handle player added
 local function onPlayerAdded(player)
-    player.CharacterAdded:Connect(function(character)
-        createESP(player)
-    end)
-    player.CharacterRemoving:Connect(function()
-        removeESP(player)
-    end)
     createESP(player)
 end
 
@@ -76,7 +79,7 @@ end
 Players.PlayerAdded:Connect(onPlayerAdded)
 addESPToAllPlayers()
 
--- Toggle ESP on/off with key "O"
+-- Toggle ESP on/off with key "U"
 UserInputService.InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.U then
         toggleESP()
