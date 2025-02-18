@@ -50,7 +50,7 @@ ESPButton.TextSize = 18
 -- Button Functionality
 AimlockButton.MouseButton1Click:Connect(function()
     local aimlockScript = [[
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/aimlock"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/aimaimlock"))()
         print("Aimlock script executed.")
     ]]
     loadstring(aimlockScript)()
@@ -58,7 +58,7 @@ end)
 
 ESPButton.MouseButton1Click:Connect(function()
     local espScript = [[
-     loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/esp"))()
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/brandonmakerlol/scripts-lol/main/essp"))()
         print("ESP script executed.")
     ]]
     loadstring(espScript)()
